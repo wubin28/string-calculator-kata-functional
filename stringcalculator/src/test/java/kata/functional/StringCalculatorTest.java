@@ -15,6 +15,10 @@ public class StringCalculatorTest {
         assertEquals(1, StringCalculator.sum("1"));
     }
 
-    // TODO: should_return_the_sum_for_two_numbers
+    @Test
+    public void should_return_the_sum_for_two_numbers() {
+        assertEquals(3, StringCalculator.sum("1,2"));
+    }
+
 
 }
