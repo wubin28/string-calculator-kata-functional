@@ -1,6 +1,8 @@
 package kata.functional;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,7 +44,11 @@ public class StringCalculatorTest {
 
     @Test(expected = IllegalStateException.class)
     public void should_throw_an_exception_for_calling_add_with_a_negative_number() {
-        StringCalculator.sum("//;\n11;-2");
+        try {
+            StringCalculator.sum("//;\n11;-2");
+        } catch (IllegalStateException exception) {
+            assertEquals("negatives not allowed: -2", exception.getMessage());
+            throw exception;
+        }
     }
-
 }
