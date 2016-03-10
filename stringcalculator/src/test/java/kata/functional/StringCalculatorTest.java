@@ -20,7 +20,10 @@ public class StringCalculatorTest {
         assertEquals(3, StringCalculator.sum("1,2"));
     }
 
-    // TODO: should_return_the_sum_for_unknown_amount_of_numbers
-    
+    @Test
+    public void should_return_the_sum_for_unknown_amount_of_numbers() {
+        assertEquals(10, StringCalculator.sum("1,2,3,4"));
+    }
+
 
 }
