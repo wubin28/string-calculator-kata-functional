@@ -8,6 +8,11 @@ public class StringCalculator {
         if (input.length() == 0) {
             return 0;
         }
-        return Integer.parseInt(input);
+        String[] strings = input.split(",");
+        int result = 0;
+        for (String string : strings) {
+            result += Integer.parseInt(string);
+        }
+        return result;
     }
 }
