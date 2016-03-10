@@ -40,6 +40,9 @@ public class StringCalculatorTest {
         assertEquals(13, StringCalculator.sum("//;\n11;2"));
     }
 
-    // TODO: should_throw_an_exception_for_calling_add_with_a_negative_number
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_an_exception_for_calling_add_with_a_negative_number() {
+        StringCalculator.sum("//;\n11;-2");
+    }
 
 }
