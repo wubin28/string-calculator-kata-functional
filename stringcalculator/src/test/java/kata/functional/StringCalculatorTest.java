@@ -32,7 +32,7 @@ public class StringCalculatorTest {
 
     @Test
     public void should_support_different_delimiters() {
-        assertEquals(3, StringCalculator.sum("//;\\n1;2"));
+        assertEquals(3, StringCalculator.sum("//;\n1;2"));
     }
 
 }
