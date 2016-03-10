@@ -29,29 +29,13 @@ public class StringCalculator {
             formula = input;
         }
 
-        System.out.println("formula: " + formula);
-
         FluentIterable<Integer> numbers = FluentIterable.from(Arrays.asList(formula.split("")))
                 .filter(
                     new Predicate<String>() {
                         public boolean apply(String s) {
-                            return !s.equals(delimiter);
+                            return !s.equals(delimiter) && !s.equals("\n") && !s.equals("");
                         }
                     }
-                )
-                .filter(
-                        new Predicate<String>() {
-                            public boolean apply(String s) {
-                                return !s.equals("\n");
-                            }
-                        }
-                )
-                .filter(
-                        new Predicate<String>() {
-                            public boolean apply(String s) {
-                                return !s.equals("");
-                            }
-                        }
                 )
                 .transform(new Function<String, Integer>() {
                     public Integer apply(String s) {
