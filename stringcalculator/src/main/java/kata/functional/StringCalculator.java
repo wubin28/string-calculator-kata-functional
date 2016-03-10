@@ -19,13 +19,14 @@ public class StringCalculator {
     public static int sum(String input) {
 
         final String delimiter;
-        String formula = input;
+        final String formula;
 
         if (input.startsWith(DELIMITER_SYMBOL)) {
             delimiter = input.substring(DELIMITER_SYMBOL.length(), DELIMITER_SYMBOL.length() + 1);
             formula = input.substring((DELIMITER_SYMBOL + ".\n").length());
         } else {
             delimiter = DEFAULT_DELIMITER;
+            formula = input;
         }
 
         System.out.println("formula: " + formula);
