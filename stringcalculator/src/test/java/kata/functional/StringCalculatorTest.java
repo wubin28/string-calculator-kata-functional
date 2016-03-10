@@ -30,5 +30,9 @@ public class StringCalculatorTest {
         assertEquals(10, StringCalculator.sum("1\n2,3,4"));
     }
 
-    // TODO: should_support_different_delimiters
+    @Test
+    public void should_support_different_delimiters() {
+        assertEquals(3, StringCalculator.sum("//;\\n1;2"));
+    }
+
 }
