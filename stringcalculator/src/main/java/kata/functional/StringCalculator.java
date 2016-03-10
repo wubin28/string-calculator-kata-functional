@@ -1,24 +1,48 @@
 package kata.functional;
 
 import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 /**
  * Created by twer on 3/10/16.
  */
 public class StringCalculator {
     public static int sum(String input) {
-        FluentIterable<Integer> numbers = FluentIterable.from(Arrays.asList(input.split("")))
+
+        final String delimiter;
+        String formula = input;
+
+        if (input.startsWith("//")) {
+            System.out.println("matches //.");
+            delimiter = Lists.newArrayList(FluentIterable.from(Splitter.on("\n").split(input))
+                .filter(new Predicate<String>() {
+                    public boolean apply(String s) {
+                        return s.startsWith("//");
+                    }
+                })
+                .transform(new Function<String, String>() {
+                    public String apply(String s) {
+                        return s.substring("//".length(), "//".length() + 1);
+                    }
+                })
+            ).get(0);
+            formula = input.substring("//.\n".length());
+        } else {
+            delimiter = ",";
+        }
+
+        System.out.println("formula: " + formula);
+
+        FluentIterable<Integer> numbers = FluentIterable.from(Arrays.asList(formula.split("")))
                 .filter(
                     new Predicate<String>() {
                         public boolean apply(String s) {
-                            return !s.equals(",");
+                            return !s.equals(delimiter);
                         }
                     }
                 )
