@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Iterables;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,7 +14,7 @@ import java.util.Iterator;
  */
 public class StringCalculator {
     public static int sum(String input) {
-        Iterator<Integer> numbers = FluentIterable.from(Arrays.asList(input.split("")))
+        FluentIterable<Integer> numbers = FluentIterable.from(Arrays.asList(input.split("")))
                 .filter(
                     new Predicate<String>() {
                         public boolean apply(String s) {
@@ -39,19 +40,14 @@ public class StringCalculator {
                     public Integer apply(String s) {
                         return Integer.parseInt(s);
                     }
-                })
-                .iterator();
-        System.out.println("Expression: " +
-                Joiner.on("+").join(numbers));
+                });
 
-        if (input.length() == 0) {
-            return 0;
+        int sum = 0;
+
+        for (Integer number : numbers) {
+            sum += number;
         }
-        String[] strings = input.split(",|\n");
-        int result = 0;
-        for (String string : strings) {
-            result += Integer.parseInt(string);
-        }
-        return result;
+
+        return sum;
     }
 }
