@@ -35,4 +35,11 @@ public class StringCalculatorTest {
         assertEquals(3, StringCalculator.sum("//;\n1;2"));
     }
 
+    @Test
+    public void should_support_numbers_greater_than_10() {
+        assertEquals(13, StringCalculator.sum("//;\n11;2"));
+    }
+
+    // TODO: should_throw_an_exception_for_calling_add_with_a_negative_number
+
 }
