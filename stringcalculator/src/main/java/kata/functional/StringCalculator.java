@@ -1,5 +1,6 @@
 package kata.functional;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -12,13 +13,13 @@ import java.util.Iterator;
  */
 public class StringCalculator {
     public static int sum(String input) {
-        Iterator<String> numbers = FluentIterable.from(Arrays.asList(input.split("")))
+        Iterator<Integer> numbers = FluentIterable.from(Arrays.asList(input.split("")))
                 .filter(
-                        new Predicate<String>() {
-                            public boolean apply(String s) {
-                                return !s.equals(",");
-                            }
+                    new Predicate<String>() {
+                        public boolean apply(String s) {
+                            return !s.equals(",");
                         }
+                    }
                 )
                 .filter(
                         new Predicate<String>() {
@@ -27,6 +28,18 @@ public class StringCalculator {
                             }
                         }
                 )
+                .filter(
+                        new Predicate<String>() {
+                            public boolean apply(String s) {
+                                return !s.equals("");
+                            }
+                        }
+                )
+                .transform(new Function<String, Integer>() {
+                    public Integer apply(String s) {
+                        return Integer.parseInt(s);
+                    }
+                })
                 .iterator();
         System.out.println("Expression: " +
                 Joiner.on("+").join(numbers));
