@@ -18,19 +18,7 @@ public class StringCalculator {
         String formula = input;
 
         if (input.startsWith("//")) {
-            System.out.println("matches //.");
-            delimiter = Lists.newArrayList(FluentIterable.from(Splitter.on("\n").split(input))
-                .filter(new Predicate<String>() {
-                    public boolean apply(String s) {
-                        return s.startsWith("//");
-                    }
-                })
-                .transform(new Function<String, String>() {
-                    public String apply(String s) {
-                        return s.substring("//".length(), "//".length() + 1);
-                    }
-                })
-            ).get(0);
+            delimiter = input.substring("//".length(), "//".length() + 1);
             formula = input.substring("//.\n".length());
         } else {
             delimiter = ",";
