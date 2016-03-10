@@ -12,16 +12,20 @@ import java.util.Arrays;
  * Created by twer on 3/10/16.
  */
 public class StringCalculator {
+
+    public static final String DEFAULT_DELIMITER = ",";
+    public static final String DELIMITER_SYMBOL = "//";
+
     public static int sum(String input) {
 
         final String delimiter;
         String formula = input;
 
-        if (input.startsWith("//")) {
-            delimiter = input.substring("//".length(), "//".length() + 1);
-            formula = input.substring("//.\n".length());
+        if (input.startsWith(DELIMITER_SYMBOL)) {
+            delimiter = input.substring(DELIMITER_SYMBOL.length(), DELIMITER_SYMBOL.length() + 1);
+            formula = input.substring((DELIMITER_SYMBOL + ".\n").length());
         } else {
-            delimiter = ",";
+            delimiter = DEFAULT_DELIMITER;
         }
 
         System.out.println("formula: " + formula);
