@@ -5,6 +5,9 @@ package kata.functional;
  */
 public class StringCalculator {
     public static int sum(String input) {
-        return 0;
+        if (input.length() == 0) {
+            return 0;
+        }
+        return Integer.parseInt(input);
     }
 }
