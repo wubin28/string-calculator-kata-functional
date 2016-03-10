@@ -10,7 +10,11 @@ public class StringCalculatorTest {
         assertEquals(0, StringCalculator.sum(""));
     }
 
-    // TODO: should_return_the_number_itself_for_one_number
+    @Test
+    public void should_return_the_number_itself_for_one_number() {
+        assertEquals(1, StringCalculator.sum("1"));
+    }
+
     // TODO: should_return_the_sum_for_two_numbers
 
 }
