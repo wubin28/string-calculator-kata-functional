@@ -1,6 +1,7 @@
 package kata.functional;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
@@ -29,7 +30,14 @@ public class StringCalculator {
             formula = input;
         }
 
-        FluentIterable<Integer> numbers = FluentIterable.from(Arrays.asList(formula.split("")))
+        final String delimiterOnlyFormula = Joiner.on("").join(FluentIterable.from(Arrays.asList(formula.split("")))
+                .transform(new Function<String, String>() {
+                    public String apply(String s) {
+                        return s.equals("\n") ? delimiter : s;
+                    }
+                }));
+
+        FluentIterable<Integer> numbers = FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
                 .filter(
                     new Predicate<String>() {
                         public boolean apply(String s) {
