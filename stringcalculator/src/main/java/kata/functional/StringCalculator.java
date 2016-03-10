@@ -9,6 +9,8 @@ import com.google.common.collect.Lists;
 
 import java.util.Arrays;
 
+import static com.google.common.base.Preconditions.checkState;
+
 /**
  * Created by twer on 3/10/16.
  */
@@ -47,6 +49,7 @@ public class StringCalculator {
                 )
                 .transform(new Function<String, Integer>() {
                     public Integer apply(String s) {
+                        checkState(Integer.parseInt(s) >= 0, "negatives not allowed: " + s);
                         return Integer.parseInt(s);
                     }
                 });
