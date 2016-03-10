@@ -42,24 +42,24 @@ public class StringCalculator {
         checkState(
                 !Iterables.contains(Arrays.asList(delimiterOnlyFormula.split("")), "-"),
                 "negatives not allowed: " + Joiner.on(", ").join(
-                    FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
-                        .filter(
-                                new Predicate<String>() {
-                                    public boolean apply(String s) {
-                                        return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && s.startsWith("-");
-                                    }
-                                }
-                        )
+                        FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
+                                .filter(
+                                        new Predicate<String>() {
+                                            public boolean apply(String s) {
+                                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && s.startsWith("-");
+                                            }
+                                        }
+                                )
                 )
         );
 
         FluentIterable<Integer> numbers = FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
                 .filter(
-                    new Predicate<String>() {
-                        public boolean apply(String s) {
-                            return !s.equals(delimiter) && !s.equals("\n") && !s.equals("");
+                        new Predicate<String>() {
+                            public boolean apply(String s) {
+                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("");
+                            }
                         }
-                    }
                 )
                 .transform(new Function<String, Integer>() {
                     public Integer apply(String s) {
