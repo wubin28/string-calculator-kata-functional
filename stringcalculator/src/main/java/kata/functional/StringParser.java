@@ -30,7 +30,7 @@ public class StringParser {
         final String delimiterOnlyFormula = replaceNewLineWithDelimiter(delimiter, formula);
 
         checkState(
-                !Iterables.contains(Arrays.asList(delimiterOnlyFormula.split("")), "-"),
+                !delimiterOnlyFormula.contains("-"),
                 "negatives not allowed: " + Joiner.on(", ").join(
                         FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
                                 .filter(
