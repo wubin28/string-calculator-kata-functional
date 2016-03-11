@@ -59,4 +59,9 @@ public class StringCalculatorTest {
             throw exception;
         }
     }
+
+    @Test
+    public void numbers_bigger_than_1000_should_be_ignored() {
+        assertEquals(2, StringCalculator.sum("2,1001"));
+    }
 }
