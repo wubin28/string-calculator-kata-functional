@@ -44,7 +44,7 @@ public class StringParser {
                 .filter(
                         new Predicate<String>() {
                             public boolean apply(String s) {
-                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("");
+                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && Integer.parseInt(s) <= 1000;
                             }
                         }
                 )
