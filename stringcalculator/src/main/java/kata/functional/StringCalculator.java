@@ -1,13 +1,6 @@
 package kata.functional;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Predicate;
-import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
-
-import java.util.Arrays;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -21,7 +14,7 @@ public class StringCalculator {
 
     public static int sum(String input) {
 
-        FluentIterable<Integer> numbers = getIntegers(input);
+        FluentIterable<Integer> numbers = StringParser.getIntegers(input);
 
         int sum = 0;
 
@@ -32,51 +25,4 @@ public class StringCalculator {
         return sum;
     }
 
-    private static FluentIterable<Integer> getIntegers(String input) {
-        final String delimiter;
-        final String formula;
-
-        if (input.startsWith(DELIMITER_SYMBOL)) {
-            delimiter = input.substring(DELIMITER_SYMBOL.length(), DELIMITER_SYMBOL.length() + 1);
-            formula = input.substring((DELIMITER_SYMBOL + ".\n").length());
-        } else {
-            delimiter = DEFAULT_DELIMITER;
-            formula = input;
-        }
-
-        final String delimiterOnlyFormula = Joiner.on("").join(FluentIterable.from(Arrays.asList(formula.split("")))
-                .transform(new Function<String, String>() {
-                    public String apply(String s) {
-                        return s.equals("\n") ? delimiter : s;
-                    }
-                }));
-
-        checkState(
-                !Iterables.contains(Arrays.asList(delimiterOnlyFormula.split("")), "-"),
-                "negatives not allowed: " + Joiner.on(", ").join(
-                        FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
-                                .filter(
-                                        new Predicate<String>() {
-                                            public boolean apply(String s) {
-                                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && s.startsWith("-");
-                                            }
-                                        }
-                                )
-                )
-        );
-
-        return FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
-                .filter(
-                        new Predicate<String>() {
-                            public boolean apply(String s) {
-                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("");
-                            }
-                        }
-                )
-                .transform(new Function<String, Integer>() {
-                    public Integer apply(String s) {
-                        return Integer.parseInt(s);
-                    }
-                });
-    }
 }
