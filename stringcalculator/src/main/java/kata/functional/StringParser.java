@@ -34,6 +34,10 @@ public class StringParser {
                 "negatives not allowed: " + getAllNegativeNumbers(delimiter, delimiterOnlyFormula)
         );
 
+        return transformStringsToIntegers(delimiter, delimiterOnlyFormula);
+    }
+
+    private static FluentIterable<Integer> transformStringsToIntegers(final String delimiter, String delimiterOnlyFormula) {
         return FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
                 .filter(
                         new Predicate<String>() {
