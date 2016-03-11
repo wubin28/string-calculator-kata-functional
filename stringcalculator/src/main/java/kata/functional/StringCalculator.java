@@ -10,13 +10,9 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class StringCalculator {
 
-    public static int sum(String input) {
+    public static int sum(String input, Predicate<String> validNumber) {
 
-        FluentIterable<Integer> numbers = StringParser.getIntegers(input, new Predicate<String>() {
-            public boolean apply(String s) {
-                return !s.equals("\n") && !s.equals("") && Integer.parseInt(s) <= 1000;
-            }
-        });
+        FluentIterable<Integer> numbers = StringParser.getIntegers(input, validNumber);
 
         int sum = 0;
 
