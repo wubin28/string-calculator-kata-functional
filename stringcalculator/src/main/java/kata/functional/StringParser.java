@@ -36,18 +36,16 @@ public class StringParser {
                 "negatives not allowed: " + getAllNegativeNumbers(delimiter, delimiterOnlyFormula)
         );
 
-        return transformStringsToIntegers(delimiter, delimiterOnlyFormula);
+        return transformStringsToIntegers(delimiter, delimiterOnlyFormula, new Predicate<String>() {
+            public boolean apply(String s) {
+                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && Integer.parseInt(s) <= 1000;
+            }
+        });
     }
 
-    private static FluentIterable<Integer> transformStringsToIntegers(final String delimiter, String delimiterOnlyFormula) {
+    private static FluentIterable<Integer> transformStringsToIntegers(final String delimiter, String delimiterOnlyFormula, Predicate<String> validNumber) {
         return FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
-                .filter(
-                        new Predicate<String>() {
-                            public boolean apply(String s) {
-                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && Integer.parseInt(s) <= 1000;
-                            }
-                        }
-                )
+                .filter(validNumber)
                 .transform(new Function<String, Integer>() {
                     public Integer apply(String s) {
                         return Integer.parseInt(s);
