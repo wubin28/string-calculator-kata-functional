@@ -12,7 +12,7 @@ public class StringCalculator {
 
     public static int sum(String input, Predicate<String> validNumber) {
 
-        FluentIterable<Integer> numbers = StringParser.getIntegers(input, validNumber);
+        FluentIterable<Integer> numbers = StringParser.extractIntegers(input, validNumber);
 
         int sum = 0;
 

@@ -14,7 +14,7 @@ public class StringParser {
     public static final String DELIMITER_SYMBOL = "//";
     public static final String DEFAULT_DELIMITER = ",";
 
-    static FluentIterable<Integer> getIntegers(String input, Predicate<String> validNumber) {
+    static FluentIterable<Integer> extractIntegers(String input, Predicate<String> validNumber) {
         final String delimiter;
         final String formula;
 
