@@ -31,16 +31,7 @@ public class StringParser {
 
         checkState(
                 !delimiterOnlyFormula.contains("-"),
-                "negatives not allowed: " + Joiner.on(", ").join(
-                        FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
-                                .filter(
-                                        new Predicate<String>() {
-                                            public boolean apply(String s) {
-                                                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && s.startsWith("-");
-                                            }
-                                        }
-                                )
-                )
+                "negatives not allowed: " + getAllNegativeNumbers(delimiter, delimiterOnlyFormula)
         );
 
         return FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
@@ -56,6 +47,19 @@ public class StringParser {
                         return Integer.parseInt(s);
                     }
                 });
+    }
+
+    private static String getAllNegativeNumbers(final String delimiter, String delimiterOnlyFormula) {
+        return Joiner.on(", ").join(
+                FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
+                        .filter(
+                                new Predicate<String>() {
+                                    public boolean apply(String s) {
+                                        return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && s.startsWith("-");
+                                    }
+                                }
+                        )
+        );
     }
 
     private static String replaceNewLineWithDelimiter(final String delimiter, String formula) {
