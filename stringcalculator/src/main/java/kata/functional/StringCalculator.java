@@ -21,6 +21,18 @@ public class StringCalculator {
 
     public static int sum(String input) {
 
+        FluentIterable<Integer> numbers = getIntegers(input);
+
+        int sum = 0;
+
+        for (Integer number : numbers) {
+            sum += number;
+        }
+
+        return sum;
+    }
+
+    private static FluentIterable<Integer> getIntegers(String input) {
         final String delimiter;
         final String formula;
 
@@ -53,7 +65,7 @@ public class StringCalculator {
                 )
         );
 
-        FluentIterable<Integer> numbers = FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
+        return FluentIterable.from(Splitter.on(delimiter).split(delimiterOnlyFormula))
                 .filter(
                         new Predicate<String>() {
                             public boolean apply(String s) {
@@ -66,13 +78,5 @@ public class StringCalculator {
                         return Integer.parseInt(s);
                     }
                 });
-
-        int sum = 0;
-
-        for (Integer number : numbers) {
-            sum += number;
-        }
-
-        return sum;
     }
 }
