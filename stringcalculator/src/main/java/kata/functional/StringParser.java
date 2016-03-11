@@ -17,7 +17,7 @@ public class StringParser {
     public static final String DELIMITER_SYMBOL = "//";
     public static final String DEFAULT_DELIMITER = ",";
 
-    static FluentIterable<Integer> getIntegers(String input) {
+    static FluentIterable<Integer> getIntegers(String input, Predicate<String> validNumber) {
         final String delimiter;
         final String formula;
 
@@ -36,11 +36,7 @@ public class StringParser {
                 "negatives not allowed: " + getAllNegativeNumbers(delimiter, delimiterOnlyFormula)
         );
 
-        return transformStringsToIntegers(delimiter, delimiterOnlyFormula, new Predicate<String>() {
-            public boolean apply(String s) {
-                return !s.equals(delimiter) && !s.equals("\n") && !s.equals("") && Integer.parseInt(s) <= 1000;
-            }
-        });
+        return transformStringsToIntegers(delimiter, delimiterOnlyFormula, validNumber);
     }
 
     private static FluentIterable<Integer> transformStringsToIntegers(final String delimiter, String delimiterOnlyFormula, Predicate<String> validNumber) {
