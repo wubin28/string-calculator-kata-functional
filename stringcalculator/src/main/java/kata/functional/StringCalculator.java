@@ -9,9 +9,6 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class StringCalculator {
 
-    public static final String DEFAULT_DELIMITER = ",";
-    public static final String DELIMITER_SYMBOL = "//";
-
     public static int sum(String input) {
 
         FluentIterable<Integer> numbers = StringParser.getIntegers(input);

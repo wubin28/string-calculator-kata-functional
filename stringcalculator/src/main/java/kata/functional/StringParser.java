@@ -5,7 +5,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
 
 import java.util.Arrays;
 
@@ -15,15 +14,18 @@ import static com.google.common.base.Preconditions.checkState;
  * Created by twer on 3/11/16.
  */
 public class StringParser {
+    public static final String DELIMITER_SYMBOL = "//";
+    public static final String DEFAULT_DELIMITER = ",";
+
     static FluentIterable<Integer> getIntegers(String input) {
         final String delimiter;
         final String formula;
 
-        if (input.startsWith(StringCalculator.DELIMITER_SYMBOL)) {
-            delimiter = input.substring(StringCalculator.DELIMITER_SYMBOL.length(), StringCalculator.DELIMITER_SYMBOL.length() + 1);
-            formula = input.substring((StringCalculator.DELIMITER_SYMBOL + ".\n").length());
+        if (input.startsWith(DELIMITER_SYMBOL)) {
+            delimiter = input.substring(DELIMITER_SYMBOL.length(), DELIMITER_SYMBOL.length() + 1);
+            formula = input.substring((DELIMITER_SYMBOL + ".\n").length());
         } else {
-            delimiter = StringCalculator.DEFAULT_DELIMITER;
+            delimiter = DEFAULT_DELIMITER;
             formula = input;
         }
 
