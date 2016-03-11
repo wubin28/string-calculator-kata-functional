@@ -27,12 +27,7 @@ public class StringParser {
             formula = input;
         }
 
-        final String delimiterOnlyFormula = Joiner.on("").join(FluentIterable.from(Arrays.asList(formula.split("")))
-                .transform(new Function<String, String>() {
-                    public String apply(String s) {
-                        return s.equals("\n") ? delimiter : s;
-                    }
-                }));
+        final String delimiterOnlyFormula = replaceNewLineWithDelimiter(delimiter, formula);
 
         checkState(
                 !Iterables.contains(Arrays.asList(delimiterOnlyFormula.split("")), "-"),
@@ -61,5 +56,14 @@ public class StringParser {
                         return Integer.parseInt(s);
                     }
                 });
+    }
+
+    private static String replaceNewLineWithDelimiter(final String delimiter, String formula) {
+        return Joiner.on("").join(FluentIterable.from(Arrays.asList(formula.split("")))
+                .transform(new Function<String, String>() {
+                    public String apply(String s) {
+                        return s.equals("\n") ? delimiter : s;
+                    }
+                }));
     }
 }
