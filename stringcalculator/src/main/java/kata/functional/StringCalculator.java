@@ -3,8 +3,6 @@ package kata.functional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 
-import static com.google.common.base.Preconditions.checkState;
-
 /**
  * Created by twer on 3/10/16.
  */
